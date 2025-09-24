@@ -1,0 +1,46 @@
+directive @auth on FIELD_DEFINITION
+
+scalar Any
+scalar Time
+
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  token: String
+  refreshToken: String
+  role: String!
+  createdAt: Time
+  updatedAt: Time
+}
+
+input NewUser {
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+  updatedAt: Time
+}
+
+type AuthPayload {
+  token: String!
+  refreshToken: String!
+  user: User!
+}
+
+type Query {
+  user(id: ID!): User! @auth
+  userEmail(email: String!): User! @auth
+  usersByRole(role: String!): [User!]! @auth
+  protected: String! @auth
+  getMe: User! @auth
+}
+
+type Mutation {
+  login(email: String!, password: String!): AuthPayload!
+  register(input: NewUser!): AuthPayload!
+  deleteUser(email: String!): String! @auth
+  updateUser(email: String!, input: NewUser): String! @auth
+}
