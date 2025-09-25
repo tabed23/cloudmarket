@@ -90,6 +90,17 @@ func (p *ProductService) UpdateProduct(ctx context.Context, id primitive.ObjectI
 
 	return updatedProduct, nil
 }
+func (p *ProductService) SearchProducts(ctx context.Context, query string) ([]models.Product, error) {
+	if query == "" {
+		return nil, fmt.Errorf("search query cannot be empty")
+	}
+
+	products, err := p.repo.SearchProducts(ctx, query)
+	if err != nil {
+		return nil, fmt.Errorf("error searching products: %v", err)
+	}
+	return products, nil
+}
 
 func NewProductService(repo repository.ProductRepository) repository.ProductRepository {
 	return &ProductService{repo: repo}

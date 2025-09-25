@@ -3,6 +3,7 @@ package store
 import (
 	"context"
 	"fmt"
+	"regexp"
 
 	"github.com/tabed23/cloudmarket-product/server/models"
 	"github.com/tabed23/cloudmarket-product/server/repository"
@@ -121,5 +122,35 @@ func (p *ProductStore) FilterProducts(ctx context.Context, filters bson.M) ([]mo
 		return nil, fmt.Errorf("cursor error: %v", err)
 	}
 
+	return products, nil
+}
+
+func (p *ProductStore) SearchProducts(ctx context.Context, query string) ([]models.Product, error) {
+	filter := bson.M{
+		"$or": []bson.M{
+			{"name": primitive.Regex{Pattern: regexp.QuoteMeta(query), Options: "i"}},
+			{"description": primitive.Regex{Pattern: regexp.QuoteMeta(query), Options: "i"}},
+			{"brand": primitive.Regex{Pattern: regexp.QuoteMeta(query), Options: "i"}},
+			{"tags": primitive.Regex{Pattern: regexp.QuoteMeta(query), Options: "i"}},
+		},
+	}
+
+	cursor, err := p.collection.Find(ctx, filter)
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(ctx)
+
+	var products []models.Product
+	for cursor.Next(ctx) {
+		var product models.Product
+		if err := cursor.Decode(&product); err != nil {
+			return nil, err
+		}
+		products = append(products, product)
+	}
+	if err := cursor.Err(); err != nil {
+		return nil, err
+	}
 	return products, nil
 }

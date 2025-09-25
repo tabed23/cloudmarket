@@ -6,6 +6,7 @@ import (
 
 	"github.com/tabed23/cloudmarket-product/server/models"
 	"github.com/tabed23/cloudmarket-product/server/repository"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -74,4 +75,70 @@ func (c *CategoryService) UpdateCategory(ctx context.Context, id primitive.Objec
 		return models.Category{}, fmt.Errorf("error updating category: %v", err)
 	}
 	return updatedCategory, nil
+}
+
+func (c *CategoryService) SearchCategories(ctx context.Context, query string) ([]models.Category, error) {
+	if query == "" {
+		return nil, fmt.Errorf("search query cannot be empty")
+	}
+
+	categories, err := c.repo.SearchCategories(ctx, query)
+	if err != nil {
+		return nil, fmt.Errorf("error searching categories: %v", err)
+	}
+	return categories, nil
+}
+
+// FilterCategories filters categories based on provided criteria
+func (c *CategoryService) FilterCategories(ctx context.Context, filters bson.M) ([]models.Category, error) {
+	categories, err := c.repo.FilterCategories(ctx, filters)
+	if err != nil {
+		return nil, fmt.Errorf("error filtering categories: %v", err)
+	}
+	return categories, nil
+}
+
+// AssignProductToCategory assigns a product to a category
+func (c *CategoryService) AssignProductToCategory(ctx context.Context, productID, categoryID primitive.ObjectID) error {
+	err := c.repo.AssignProductToCategory(ctx, productID, categoryID)
+	if err != nil {
+		return fmt.Errorf("error assigning product to category: %v", err)
+	}
+	return nil
+}
+
+// RemoveProductFromCategory removes a product from a category
+func (c *CategoryService) RemoveProductFromCategory(ctx context.Context, productID, categoryID primitive.ObjectID) error {
+	err := c.repo.RemoveProductFromCategory(ctx, productID, categoryID)
+	if err != nil {
+		return fmt.Errorf("error removing product from category: %v", err)
+	}
+	return nil
+}
+
+// GetProductsInCategory gets all products in a specific category
+func (c *CategoryService) GetProductsInCategory(ctx context.Context, categoryID primitive.ObjectID) ([]models.Product, error) {
+	products, err := c.repo.GetProductsInCategory(ctx, categoryID)
+	if err != nil {
+		return nil, fmt.Errorf("error fetching products in category: %v", err)
+	}
+	return products, nil
+}
+
+// GetCategoriesForProduct gets all categories for a specific product
+func (c *CategoryService) GetCategoriesForProduct(ctx context.Context, productID primitive.ObjectID) ([]models.Category, error) {
+	categories, err := c.repo.GetCategoriesForProduct(ctx, productID)
+	if err != nil {
+		return nil, fmt.Errorf("error fetching categories for product: %v", err)
+	}
+	return categories, nil
+}
+
+// GetCategoryHierarchy gets the full hierarchy path for a category
+func (c *CategoryService) GetCategoryHierarchy(ctx context.Context, categoryID primitive.ObjectID) ([]models.Category, error) {
+	hierarchy, err := c.repo.GetCategoryHierarchy(ctx, categoryID)
+	if err != nil {
+		return nil, fmt.Errorf("error fetching category hierarchy: %v", err)
+	}
+	return hierarchy, nil
 }

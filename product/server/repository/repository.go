@@ -18,7 +18,7 @@ type ProductRepository interface {
 	DeleteProduct(ctx context.Context, id primitive.ObjectID) error
 	GetProductsByCategory(ctx context.Context, categoryID primitive.ObjectID) ([]models.Product, error)
 	FilterProducts(ctx context.Context, filters bson.M) ([]models.Product, error)
-
+	SearchProducts(ctx context.Context, query string) ([]models.Product, error)
 }
 
 type CategoryRepository interface {
@@ -28,4 +28,11 @@ type CategoryRepository interface {
 	UpdateCategory(ctx context.Context, id primitive.ObjectID, category *models.Category) (models.Category, error)
 	DeleteCategory(ctx context.Context, id primitive.ObjectID) error
 	GetSubcategories(ctx context.Context, parentID primitive.ObjectID) ([]models.Category, error)
+	SearchCategories(ctx context.Context, query string) ([]models.Category, error)
+	FilterCategories(ctx context.Context, filters bson.M) ([]models.Category, error)
+	AssignProductToCategory(ctx context.Context, productID, categoryID primitive.ObjectID) error
+	RemoveProductFromCategory(ctx context.Context, productID, categoryID primitive.ObjectID) error
+	GetProductsInCategory(ctx context.Context, categoryID primitive.ObjectID) ([]models.Product, error)
+	GetCategoriesForProduct(ctx context.Context, productID primitive.ObjectID) ([]models.Category, error)
+	GetCategoryHierarchy(ctx context.Context, categoryID primitive.ObjectID) ([]models.Category, error)
 }

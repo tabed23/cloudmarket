@@ -16,5 +16,6 @@ type Product struct {
 	Images       []string           `bson:"images"`
 	Dimensions   string             `bson:"dimensions"`
 	CategoryID   primitive.ObjectID `bson:"category_id"`
+	Categories   []primitive.ObjectID `bson:"categories,omitempty"` 
 	CreatedAt    primitive.DateTime `bson:"created_at"`
 }
