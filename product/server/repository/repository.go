@@ -8,8 +8,6 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-
-
 type ProductRepository interface {
 	CreateProduct(ctx context.Context, product *models.Product) (models.Product, error)
 	GetProductByID(ctx context.Context, id primitive.ObjectID) (models.Product, error)

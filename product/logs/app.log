@@ -1,0 +1,25 @@
+2025/09/26 12:03:31 [REQUEST] ::1 | 200 | 346µs | GET | /health | 48 bytes | Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+2025/09/26 12:03:31 [REQUEST] ::1 | 404 | 2.625µs | GET | /favicon.ico | -1 bytes | Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+2025/09/26 12:03:37 [REQUEST] ::1 | 404 | 1.667µs | GET | /h | -1 bytes | Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
+2025/09/26 12:07:47 [REQUEST] ::1 | 200 | 232.709µs | GET | /health | 48 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:08:29 [REQUEST] ::1 | 500 | 622.125µs | POST | /api/v1/categories | 153 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:08:58 [REQUEST] ::1 | 500 | 2.451458ms | POST | /api/v1/categories | 153 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:09:11 [REQUEST] ::1 | 500 | 237.125µs | GET | /api/v1/categories/507f1f77bcf86cd799439011 | 65 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:09:37 [REQUEST] ::1 | 500 | 130.042µs | PUT | /api/v1/categories/507f1f77bcf86cd799439011 | 59 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:10:52 [REQUEST] ::1 | 500 | 1.579ms | GET | /api/v1/categories | 61 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:11:13 [REQUEST] ::1 | 500 | 119µs | GET | /api/v1/categories?page=1&limit=5 | 61 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:24:23 [REQUEST] ::1 | 500 | 4.848333ms | GET | /api/v1/categories?parent_only=true | 62 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:24:26 [REQUEST] ::1 | 500 | 48.792µs | GET | /api/v1/categories?include_subcategories=true | 61 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:24:28 [REQUEST] ::1 | 500 | 1.511292ms | GET | /api/v1/categories/search?q=electronics | 62 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:24:32 [REQUEST] ::1 | 500 | 1.150125ms | GET | /api/v1/categories/filter?parent_id=507f1f77bcf86cd799439011 | 62 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:24:35 [REQUEST] ::1 | 500 | 320.333µs | GET | /api/v1/categories/filter?parent_id=null | 62 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:25:02 [REQUEST] ::1 | 500 | 4.034959ms | POST | /api/v1/categories/assign-product | 71 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:25:22 [REQUEST] ::1 | 500 | 246.417µs | POST | /api/v1/categories/remove-product | 72 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:25:56 [REQUEST] ::1 | 500 | 206.084µs | GET | /api/v1/categories/507f1f77bcf86cd799439011/products | 71 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:26:12 [REQUEST] ::1 | 500 | 330.875µs | GET | /api/v1/categories/507f1f77bcf86cd799439011/products?page=1&limit=10 | 71 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:26:29 [REQUEST] ::1 | 500 | 512.333µs | GET | /api/v1/categories/507f1f77bcf86cd799439011/hierarchy | 69 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:26:52 [REQUEST] ::1 | 400 | 92.291µs | POST | /api/v1/products | 26 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:27:30 [REQUEST] ::1 | 500 | 165.292µs | GET | /api/v1/products/507f1f77bcf86cd799439022 | 58 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:27:54 [REQUEST] ::1 | 400 | 250µs | PUT | /api/v1/products/507f1f77bcf86cd799439022 | 26 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:28:21 [REQUEST] ::1 | 500 | 175.667µs | DELETE | /api/v1/products/507f1f77bcf86cd799439022 | 58 bytes | PostmanRuntime/7.46.1
+2025/09/26 12:28:40 [REQUEST] ::1 | 500 | 234.042µs | GET | /api/v1/products | 59 bytes | PostmanRuntime/7.46.1
