@@ -27,12 +27,18 @@ func RunServer() {
 	dbName := getEnv("DATABASE_NAME", "product_service_db")
 	port := getEnv("PORT", "8080")
 	
-	db.Initialize(uri, dbName)
+	db, err := db.ConnectMongo(uri, dbName)
+	if err != nil {
+		log.Fatal("Failed to connect to MongoDB:", err)
+	}
+	db.CreateCategoryCollection(dbName)
+	db.CreateProductCollection(dbName)
+
 	if err := middleware.InitLogDirectories(); err != nil {
 		log.Printf("Warning: Failed to create log directories: %v", err)
 	}
 	// Initialize application
-	app := initializeApplication()
+	app := initializeApplication(db, dbName)
 
 	// Setup Gin router
 	router := gin.Default()
@@ -68,10 +74,10 @@ type Application struct {
 	ProductAPI   *api.ProductAPI
 }
 
-func initializeApplication() *Application {
+func initializeApplication(db *db.MongoConfig, dbName string) *Application {
 	// Initialize collections using db.GetCollection
-	categoryCollection := db.GetCollection("categories")
-	productCollection := db.GetCollection("products")
+	categoryCollection := db.GetCollection(dbName, "categories")
+	productCollection := db.GetCollection(dbName,"products")
 
 	// Initialize repositories
 	categoryRepo := store.NewCategoryStore(categoryCollection, productCollection)
